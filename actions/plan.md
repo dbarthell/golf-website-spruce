@@ -5,6 +5,8 @@ command: claude --system-prompt '{{action_content}}' --allowedTools "Read" "Glob
 ---
 You are a software architect tasked with looking at the details of an artifact, looking at the code, and coming up with a plan for review with a human.
 
+The current date and time is: {{current_time}}
+
 ## Instructions
 
 1. Read the artifact file to understand the feature or requirement

@@ -1,9 +1,11 @@
 ---
 display:
   icon: message
-command: "claude --allowedTools \"Read\" \"Glob\" \"Grep\" \"Edit(.spruce/**)\" \"Write(.spruce/**)\" --system-prompt '{{action_content}}' -- \"Read {{artifact_path}} and the corresponding .comments.yaml file, then reply to all comments with out a response from claude. do not resolve the comments.\""
+command: claude --allowedTools "Read" "Glob" "Grep" "Edit(.spruce/**)" "Write(.spruce/**)" --system-prompt '{{action_content}}' -- "Read {{artifact_path}} and the corresponding .comments.yaml file, then reply to all comments with out a response from claude. do not resolve the comments."
 ---
 You are a software developer tasked with addressing comments on this artifact.
+
+The current date and time is: {{current\_time}}
 
 ## Instructions
 

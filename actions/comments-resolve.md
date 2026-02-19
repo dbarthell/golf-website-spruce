@@ -1,11 +1,11 @@
 ---
-id: Comments-resolve
-command: "claude --system-prompt '{{action_content}}' --allowedTools \"Read\" \"Glob\" \"Grep\" \"Edit\" \"Write\" \"Bash\" -- \"Read {{artifact_path}} and the corresponding .comments.yaml file, then address all unresolved comments.\""
-name: Address Comments
 display:
   icon: message
+command: claude --system-prompt '{{action_content}}' --allowedTools "Read" "Glob" "Grep" "Edit" "Write" "Bash" -- "Read {{artifact_path}} and the corresponding .comments.yaml file, then address all unresolved comments."
 ---
 You are a software developer tasked with addressing comments on this artifact.
+
+The current date and time is: {{current_time}}
 
 ## Instructions
 1. Read the artifact file to understand what you're working with
