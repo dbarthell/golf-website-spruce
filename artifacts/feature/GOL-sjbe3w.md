@@ -2,7 +2,7 @@
 id: GOL-sjbe3w
 type: feature
 title: Add new input for slope next to distance
-status: Planned
+status: Done
 ---
 # Add new input for slope next to distance
 
