@@ -17,14 +17,17 @@ When a user clicks on the clock face, I want to show more visual information abo
 An SVG overlay (`#clock-svg`) sits inside the clock face and draws geometric visuals based on distance, slope, and clock position. The SVG scales automatically with the CSS clock size via `viewBox="0 0 200 200"` and `width/height: 100%`.
 
 **Always visible** (as soon as distance + slope are entered):
+
 - Thin vertical measurement line from cup center → ZBL dot
 - Filled white ZBL dot at `(C, C − zblPx)` — fixed at 12 o'clock above the cup
 - `ZBL` label above the dot; inch value alongside the measurement line
 
 **When a clock position is selected with break:**
+
 - Dashed line from ball position → ZBL dot (the zero break line)
 
 **Removed from SVG (considered and rejected):**
+
 - Curved ball path to hole
 - Lateral aim line/dot/diamond
 - Triangle hypotenuse
@@ -38,7 +41,8 @@ The lateral aim is instead communicated in the result panel (see below).
 
 Clock face enlarged to **280 × 280 px** to give the SVG layer breathing room. Hour-position button layout constants updated to match.
 
-**`css/mobile.css`**
+[mobile.css](code://css/mobile.css)
+
 ```css
 .clock-face {
   width: 280px;
@@ -62,7 +66,8 @@ Clock face enlarged to **280 × 280 px** to give the SVG layer breathing room. H
 }
 ```
 
-**`js/mobile.js` · `initClockFace()`**
+[mobile.js](code://js/mobile.js)**&#32;·&#32;`initClockFace()`**
+
 ```js
 const R = 116; // radius from center in px
 const C = 140; // center (half of 280px face)
@@ -138,7 +143,8 @@ The aim cell shows the lateral aim and ZBL reference in text rather than on the 
 </div>
 ```
 
-**`css/mobile.css`** — new classes:
+[mobile.css](code://css/mobile.css) — new classes:
+
 ```css
 .result-zbl-ref {
   font-size: 0.7rem;
@@ -156,6 +162,7 @@ The aim cell shows the lateral aim and ZBL reference in text rather than on the 
 ```
 
 Also updated `.result-value`:
+
 - `line-height: 1` → `1.15` (prevents descender clipping on letters like `g`)
 - Removed `word-break: break-all` (was splitting words mid-character)
 
@@ -183,5 +190,5 @@ Also updated `.result-value`:
 
 | File | Change |
 | --- | --- |
-| [`css/mobile.css`](code://css/mobile.css) | Enlarge `.clock-face` to 280×280; `.clock-hand` height 95px; `.clock-pos` 38px buttons; add `#clock-svg` rule; add `.result-zbl-ref`; add `.result-value-word`; fix `.result-value` line-height; center `.slope-row` |
-| [`js/mobile.js`](code://js/mobile.js) | Update `R`/`C` in `initClockFace()`; append SVG; add `drawClockAnnotations()`; clock aim cell shows `X" out` / `Straight` + ZBL sub-line; non-clock branch passes `zblAimBase` to `drawClockAnnotations` |
+| [`[mobile.css](code://css/mobile.css)`](code://css/mobile.css) | Enlarge `.clock-face` to 280×280; `.clock-hand` height 95px; `.clock-pos` 38px buttons; add `#clock-svg` rule; add `.result-zbl-ref`; add `.result-value-word`; fix `.result-value` line-height; center `.slope-row` |
+| [`[mobile.js](code://js/mobile.js)`](code://js/mobile.js) | Update `R`/`C` in `initClockFace()`; append SVG; add `drawClockAnnotations()`; clock aim cell shows `X" out` / `Straight` + ZBL sub-line; non-clock branch passes `zblAimBase` to `drawClockAnnotations` |
