@@ -1,0 +1,23 @@
+documentId: GOL-64zyyf
+artifactId: GOL-64zyyf
+comments:
+  comment-1772379971908-9w4k8n:
+    id: comment-1772379971908-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-01T15:46:11.906Z
+    resolved: true
+    published: true
+    commentType: artifact-line
+    text: Let get rid of the superscript/subscript under the ZBL AIM when no clock position is selected since we’ll be showing some of that already on the clock and because it takes up space.
+    anchor:
+      blockType: heading
+      contentSnapshot: Visual summary of what the user sees
+      blockIndexAtCreation: 42
+      headingLevel: 3
+    originalText: Visual summary of what the user sees
+    replies:
+      reply-1772379971908-claude:
+        id: reply-1772379971908-claude
+        author: claude
+        timestamp: 2026-03-01T15:46:15.941Z
+        text: Done. Added a new Part 3 to the implementation plan that removes the `.variance-display` block from the non-clock result panel, replacing the `result-value-container` wrapper + variance HTML with a plain `result-value` div. The visual summary table now shows "plain ZBL aim (no variance display)" for the no-clock-selected state. The variance display is kept only in the clock-mode Aim cell (now Part 4), so the result panel and SVG annotations stay consistent — variance is shown geometrically on the clock when a position is selected, and numerically in the result panel only then. Also updated the files changed summary to reflect the new removal step.
