@@ -1,0 +1,23 @@
+documentId: GOL-n5qdkq
+artifactId: GOL-n5qdkq
+comments:
+  comment-1772377951590-9w4k8n:
+    id: comment-1772377951590-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-01T15:12:31.587Z
+    resolved: true
+    published: true
+    commentType: artifact-line
+    text: No, we should always show the Backswing and Aim item in the main row. I only want to get rid of the redundant backswing item in the slope row below it since that’s always the same as the main Backswing item
+    anchor:
+      blockType: paragraph
+      contentSnapshot: When clockSlopeRowHTML will be shown (i.e., there IS an uphill/downhill component), the result-row should show only the Aim item, centered. When there
+      precedingHeading: The fix
+      blockIndexAtCreation: 24
+    originalText: When clockSlopeRowHTML will be shown (i.e., there IS an uphill/downhill component), the result-row should show only the Aim item, centered. When there is no slope component the layout stays as-is (both Backswing + Aim).
+    replies:
+      reply-1772377960000-claude:
+        id: reply-1772377960000-claude
+        author: claude
+        timestamp: 2026-03-01T15:13:00Z
+        text: 'Corrected the plan and implemented accordingly. The main result-row always shows both Backswing and Aim (no conditional logic added). Only the slope row was changed: removed the right column (divider + backswing label + backswing value) and added `slope-row-centered` to center the remaining direction + distance. Changes made to js/mobile.js and css/mobile.css.'
