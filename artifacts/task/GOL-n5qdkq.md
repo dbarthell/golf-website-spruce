@@ -143,7 +143,7 @@ const lateralAim = Math.round((zblAimBase + varianceAdj) * breakAbs);
 
 | File | Change |
 | --- | --- |
-| `[[index.html](code://index.html)](code://index.html)` | Line 60: `Cal` → `Calibrate` |
-| `[[log.html](code://log.html)](code://log.html)` | Already done — logo div removed (working copy only; needs commit) |
-| `[[mobile.js](code://js/mobile.js)](code://js/mobile.js)` | `updateLookupResult()` clock branch: remove backswing column from slope row, center direction + distance; apply superscript/subscript variance correction to lateral aim |
-| `[[mobile.css](code://css/mobile.css)](code://css/mobile.css)` | Add `.slope-row-centered { justify-content: center; gap: … }` |
+| `[[[index.html](code://index.html)](code://index.html)](code://index.html)` | Line 60: `Cal` → `Calibrate` |
+| `[[[log.html](code://log.html)](code://log.html)](code://log.html)` | Already done — logo div removed (working copy only; needs commit) |
+| `[[[mobile.js](code://js/mobile.js)](code://js/mobile.js)](code://js/mobile.js)` | `updateLookupResult()` clock branch: remove backswing column from slope row, center direction + distance; apply superscript/subscript variance correction to lateral aim |
+| `[[[mobile.css](code://css/mobile.css)](code://css/mobile.css)](code://css/mobile.css)` | Add `.slope-row-centered { justify-content: center; gap: … }` |
