@@ -1,7 +1,7 @@
 ---
 display:
-  color: '#06b6d4'
-  icon: star-filled
+  color: '#64748b'
+  icon: tool
 schema:
   assignee:
     description: Person responsible for this work
@@ -117,19 +117,5 @@ schema:
       value: Cancelled
     required: true
     type: text
-  bugs:
-    description: Related bug items
-    label: Bugs
-    multiple: true
-    required: false
-    template: bug
-    type: relationship
-  tasks:
-    description: Related task items
-    label: Tasks
-    multiple: true
-    required: false
-    template: task
-    type: relationship
 ---
-A planned piece of work that delivers user-facing value — new capabilities, improvements, or enhancements.
+Internal work with no direct user impact — refactoring, tech debt cleanup, dependency upgrades, OE, CI/CD, documentation.

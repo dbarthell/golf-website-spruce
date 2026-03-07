@@ -1,8 +1,5 @@
 ---
-searchQuery:
-  type:
-  - feature
-  - task
+searchQuery: {}
 searchOptions:
   groupBy: status
   sortBy:
@@ -10,12 +7,13 @@ searchOptions:
     direction: asc
   visibleFields:
   - priority
-  - id
+  - size
   - assignee
+  - templateType
   - tasks
   showEmptyGroups: true
-  showNoValueGroup: true
+  showNoValueGroup: false
 ---
 # Kanban
 
-Kanban board view showing all features and tasks grouped by status.
+All work items grouped by status.

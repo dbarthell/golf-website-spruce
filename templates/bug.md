@@ -1,10 +1,10 @@
 ---
 display:
-  color: '#ec4899'
-  icon: subtask
+  color: '#f97316'
+  icon: bug
 schema:
   status:
-    defaultValue: Todo
+    defaultValue: Backlog
     description: Current state of the work
     hints:
     - pinned
@@ -14,6 +14,11 @@ schema:
     - display:
         color: '#64748b'
         icon: circle-dashed
+      label: Backlog
+      value: Backlog
+    - display:
+        color: '#f97316'
+        icon: circle-dot
       label: Todo
       value: Todo
     - display:
@@ -22,11 +27,21 @@ schema:
       label: In Progress
       value: In Progress
     - display:
+        color: '#8b5cf6'
+        icon: eye-check
+      label: In Review
+      value: In Review
+    - display:
         color: '#22c55e'
         icon: circle-check
       label: Done
       value: Done
-    required: false
+    - display:
+        color: '#64748b'
+        icon: circle-x
+      label: Cancelled
+      value: Cancelled
+    required: true
     type: text
   priority:
     description: How urgent this work is
@@ -70,4 +85,4 @@ schema:
     required: false
     type: user
 ---
-A small, concrete unit of work. Can stand alone or be linked to a feature via the feature's Tasks field.
+A defect, regression, or unexpected behavior that needs investigation and resolution.
