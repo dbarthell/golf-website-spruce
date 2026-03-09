@@ -1,0 +1,32 @@
+artifactId: GOL-6ry6v4
+comments:
+  comment-1773086985122-9w4k8n:
+    id: comment-1773086985122-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-09T20:09:45.119Z
+    resolved: false
+    draft: false
+    commentType: artifact-line
+    text: do you like this approach or are there other colors you’d recommend for this kind of app?
+    anchor:
+      blockType: list-item
+      contentSnapshot: 'Update the app’s blue palette — the new logo’s background is a slightly brighter/richer navy (approximately #1a3057) compared to the existing --green-'
+      precedingHeading: Summary
+      blockIndexAtCreation: 7
+    originalText: 'Update the app’s blue palette — the new logo’s background is a slightly brighter/richer navy (approximately #1a3057) compared to the existing --green-dark (#0e1b3d) / --green-mid (#192d68). The header gradient should be updated to match.'
+    replies: {}
+  comment-1773087034044-9w4k8n:
+    id: comment-1773087034044-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-09T20:10:34.043Z
+    resolved: false
+    draft: false
+    commentType: artifact-line
+    text: 1. that’s close enough. 2. bigger. 3. Yes. 4. yes.
+    anchor:
+      blockType: heading
+      contentSnapshot: Open Questions for Human Review
+      blockIndexAtCreation: 32
+      headingLevel: 3
+    originalText: Open Questions for Human Review
+    replies: {}
