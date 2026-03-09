@@ -2,7 +2,7 @@
 id: GOL-41p6vs
 type: feature
 title: Add numbers for lag putting
-status: In Progress
+status: Done
 ---
 # Add numbers for lag putting
 
@@ -101,7 +101,7 @@ Add a **Lag Putting** card to the existing Putting section. It will display a re
 ### Files to Change
 
 | File | Change |
-|---|---|
+| --- | --- |
 | `data/putting.json` | Add `lagPuttingTable` key with 7 data rows |
 | `js/app.js` | Add `renderLagPuttingTable()` function; call it from `renderPutting()` |
 | `css/styles.css` | Add styles for `.lag-table` |

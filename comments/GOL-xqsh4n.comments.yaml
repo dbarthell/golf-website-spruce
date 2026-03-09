@@ -1,0 +1,90 @@
+artifactId: GOL-xqsh4n
+comments:
+  comment-1773002686373-9w4k8n:
+    id: comment-1773002686373-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-08T20:44:46.371Z
+    resolved: false
+    draft: false
+    commentType: artifact-line
+    text: Shouldn't this be considered our "secret sauce", or is transparency more important?
+    anchor:
+      blockType: heading
+      contentSnapshot: 1. 🎯 Show ZBL Variance (Quick Win)
+      blockIndexAtCreation: 9
+      headingLevel: 3
+    originalText: 1. 🎯 Show ZBL Variance (Quick Win)
+    replies:
+      reply-1773003128000-claude:
+        id: reply-1773003128000-claude
+        author: claude
+        timestamp: 2026-03-08T20:52:08Z
+        text: |
+          Great question to flag. The variance data itself comes from the Bryson slope table, which is already publicly known in the golfing community — showing it doesn't give away anything proprietary. What makes ZeroBreak special is the *integration*: personal distanceFactor calibration + ZBL aim + the body-landmark system, all unified in one tool. Surfacing the variance band actually *reinforces* the sophistication of the system in the user's mind rather than giving anything away.
+
+          That said, if you'd prefer to keep it lower-profile, we could make variance display optional — off by default, togglable in Settings. That way power users who want the extra info can enable it, while the default experience stays clean and doesn't invite scrutiny of the underlying table. Happy to go either way — just let me know your preference.
+      reply-1773003426255-9w4k8n:
+        id: reply-1773003426255-9w4k8n
+        author: 9w4k8n
+        timestamp: 2026-03-08T20:57:06.253Z
+        text: True. Let’s go with your recommendation in that case.
+  comment-1773002852094-9w4k8n:
+    id: comment-1773002852094-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-08T20:47:32.093Z
+    resolved: false
+    draft: false
+    commentType: artifact-line
+    text: I want to eventually launch this in the apple app store so this may not be needed, or may need a different approach to get it ready for that
+    anchor:
+      blockType: heading
+      contentSnapshot: 5. 📱 Improved PWA Install Experience
+      blockIndexAtCreation: 55
+      headingLevel: 3
+    originalText: 5. 📱 Improved PWA Install Experience
+    replies:
+      reply-1773003128001-claude:
+        id: reply-1773003128001-claude
+        author: claude
+        timestamp: 2026-03-08T20:52:08Z
+        text: |
+          Totally makes sense. A few things worth knowing as you plan the App Store path:
+
+          1. **PWA banner is naturally a no-op on iOS** — the `beforeinstallprompt` event is a Chrome/Android API that Safari never fires, so the banner simply won't appear for iOS users even if we ship it. No conflict.
+          2. **For the App Store**, the most practical approach with the existing Vite/React codebase is to wrap it in a **Capacitor** shell (Ionic's native bridge). Capacitor adds a thin Swift/Kotlin wrapper around a WKWebView, lets you keep all your existing code, and produces a proper `.ipa` for App Store submission. Minimal rewrite required.
+          3. **PWA still matters for Android/desktop web** even after an iOS native app ships — so the install prompt feature has a valid audience on those platforms.
+
+          Recommend: keep the PWA banner feature for non-iOS platforms, and track the App Store native wrapper as a separate workstream when you're ready for that investment. We can note this in the feature spec.
+      reply-1773003451437-9w4k8n:
+        id: reply-1773003451437-9w4k8n
+        author: 9w4k8n
+        timestamp: 2026-03-08T20:57:31.436Z
+        text: Sounds good.
+  comment-1773003101909-9w4k8n:
+    id: comment-1773003101909-9w4k8n
+    author: 9w4k8n
+    timestamp: 2026-03-08T20:51:41.907Z
+    resolved: true
+    draft: false
+    commentType: artifact-line
+    text: 1. If we did infinite, could we sell this as a premium feature? 2. do what you think is best. 3. do what you think is best. 4. do what you think is best? 5. do what you think is best. 6. not sure yet. 7. not sure yet.
+    anchor:
+      blockType: heading
+      contentSnapshot: Open Questions for Human Review
+      blockIndexAtCreation: 96
+      headingLevel: 2
+    originalText: Open Questions for Human Review
+    replies:
+      reply-1773003128002-claude:
+        id: reply-1773003128002-claude
+        author: claude
+        timestamp: 2026-03-08T20:52:08Z
+        text: |
+          Yes — infinite history is a great premium hook! I've updated the Open Questions section in the memo with decisions on all seven items. Here's the summary:
+
+          1. **Putt log scope** — Infinite history with round separation becomes a *premium feature*. Free tier shows last 3 rounds; premium unlocks full history + export. Clean upsell.
+          2. **Calibration profiles** — Named profiles UX is the right shape. A lightweight "quick adjust" nudge (±10%) on the main page can complement the full Calibrate flow for on-the-fly tweaks.
+          3. **Units toggle** — Global setting persisted to localStorage. Aim output (inches) converts to cm in metric mode — metric users shouldn't have to convert in their head.
+          4. **ZBL variance** — Ship inline text first (`3" ±1"` beneath the aim value). Reserve the clock SVG visual band for a later polish pass.
+          5. **Ruler export** — SVG wins: vector, DXF-compatible for laser engravers, no extra dependencies. Print as landscape 8.5×11 pages, tiled if needed.
+          6 & 7. **Ruler order flow & Priority** — Marked "not determined yet" in the memo. I added a suggested sequencing by effort/impact as a starting point.
