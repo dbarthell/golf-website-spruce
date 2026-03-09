@@ -2,7 +2,7 @@
 id: GOL-6ry6v4
 type: feature
 title: New logo
-status: In Review
+status: Done
 ---
 # New logo
 
