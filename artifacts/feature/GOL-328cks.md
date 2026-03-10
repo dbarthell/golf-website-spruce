@@ -2,7 +2,7 @@
 id: GOL-328cks
 type: feature
 title: Simple website
-status: In Progress
+status: Done
 ---
 # Simple website
 
@@ -19,7 +19,7 @@ Build a clean, modern, single-page golf reference website. Since the goal is sim
 ### Tech Stack
 
 | Layer | Choice | Rationale |
-|-------|--------|-----------|
+| --- | --- | --- |
 | Markup | HTML5 | Simple, no build step needed |
 | Styling | CSS3 (with custom properties) | Modern, maintainable, no dependencies |
 | Interactivity | Vanilla JS | Minimal needs — tab switching, possible expand/collapse |
@@ -48,34 +48,38 @@ golf-website/
 The site will be a single page with a sticky top nav for quick section jumping:
 
 #### 1. Header / Hero
+
 - Site title (e.g., "My Golf Numbers")
 - Clean, minimal branding with a golf-green color palette
 
 #### 2. Club Yardages Section
+
 - **Organized by category** using a tabbed or card-based layout:
-  - **Woods** (Driver, 3W, 5W, etc.)
-  - **Hybrids**
-  - **Irons** (3i–PW)
-  - **Wedges** (GW, SW, LW — with partial swing yardages if desired)
+- **Woods** (Driver, 3W, 5W, etc.)
+- **Hybrids**
+- **Irons** (3i–PW)
+- **Wedges** (GW, SW, LW — with partial swing yardages if desired)
 - Each club displayed as a card or table row showing:
-  - Club name
-  - Carry distance
-  - Total distance (optional)
-  - Notes (e.g., "stock shot", "punch", shot shape tendencies)
+- Club name
+- Carry distance
+- Total distance (optional)
+- Notes (e.g., "stock shot", "punch", shot shape tendencies)
 - Data loaded from `data/clubs.json` so yardages can be updated without touching HTML
 
 #### 3. Vector Putting Numbers Section
+
 - A reference card/table for vector putting values
 - Organized by key metrics the user needs to recall on the course
-  - Could include: stimp adjustments, slope %, break values, green speed references
+- Could include: stimp adjustments, slope %, break values, green speed references
 - Clean, readable layout designed for quick glance on a phone
 
 #### 4. Additional Golf Info Section (Expandable)
+
 - A flexible area for other reference info, such as:
-  - Pre-shot routine checklist
-  - Course strategy notes
-  - Swing thoughts / keys
-  - Rules quick-reference
+- Pre-shot routine checklist
+- Course strategy notes
+- Swing thoughts / keys
+- Rules quick-reference
 - Implemented as collapsible accordion cards so it stays tidy
 
 ### Design Approach

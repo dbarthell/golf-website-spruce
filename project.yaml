@@ -1,0 +1,15 @@
+id: 586a80c0-a718-43fc-b524-2ffdf57faff5
+alias: GOL
+color: '#ef4444'
+focusBarFilter:
+  conditions:
+  - type: hasBranch
+  - type: hasActiveSession
+  - type: fieldFilter
+    field: status
+    filter:
+      type: in
+      values:
+      - Todo
+      - In Progress
+      - In Review

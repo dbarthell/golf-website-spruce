@@ -4,7 +4,7 @@ type: feature
 title: ZBL Variance Display
 priority: Medium
 size: S
-status: In Review
+status: Done
 tasks: []
 ---
 # ZBL Variance Display
