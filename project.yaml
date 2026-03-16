@@ -13,3 +13,4 @@ focusBarFilter:
       - Todo
       - In Progress
       - In Review
+baseBranch: main
