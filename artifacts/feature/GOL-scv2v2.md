@@ -2,7 +2,7 @@
 id: GOL-scv2v2
 type: feature
 title: Update logo and color pallette for app
-status: In Review
+status: Done
 ---
 # Update logo and color pallette for app
 
