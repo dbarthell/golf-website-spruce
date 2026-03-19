@@ -246,7 +246,7 @@ Apple review typically takes 1–3 business days.
 
 - [x] `vite.config.ts` updated with conditional `CAPACITOR_BUILD` base path
 - [x] `cross-env` added to devDependencies; `build:ios` script added to `package.json`
-- [x] `capacitor.config.ts` created (`appId: com.zerobreakgolf.app`)
+- [x] `capacitor.config.ts` created (`appId: com.zerobreakgolf.zerobreak`)
 - [x] `viewport-fit=cover` added to [index.html](code://index.html) meta viewport
 - [x] Safe-area inset padding added to [global.css](code://src/styles/global.css)
 - [x] `public/privacy.html` created (will deploy to GitHub Pages with next push)
@@ -256,15 +256,18 @@ Apple review typically takes 1–3 business days.
 - [x] 2732×2732 splash PNG generated at `assets/splash.png`
 - [x] Icon generated at `assets/icon.png` (cropped from `images/zb-logo.jpg`, 1024×1024)
 - [x] `npm run build:ios` succeeds
-- [x] Xcode opened: Bundle Identifier confirmed as `com.zerobreakgolf.app`
+- [x] Xcode opened: Bundle Identifier confirmed as `com.zerobreakgolf.zerobreak`
 - [x] Xcode: Apple ID added and Team selected in Signing & Capabilities
 - [x] Xcode: orientations locked to Portrait only (General tab)
 - [x] `npx capacitor-assets generate --ios` run successfully
-- [ ] ⏳ **Waiting on Apple:** Developer account fully validated (DUNS confirmed Mar 17 — expect 2–5 business days)
-- [ ] Register `com.zerobreakgolf.app` App ID at developer.apple.com → Identifiers
-- [ ] App Store Connect: app record created, all metadata filled in
+- [x] ⏳ **Waiting on Apple:** Developer account fully validated
+- [x] Register `com.zerobreakgolf.zerobreak` App ID at developer.apple.com → Identifiers
+- [x] iOS Distribution certificate created and installed in Keychain
+- [x] App Store provisioning profile created (ZeroBreak App Store) and selected in Xcode Release config
+- [x] App Store Connect: app record created
+- [x] Archive built and uploaded from Xcode
+- [ ] App Store Connect: all metadata filled in
 - [ ] Screenshots captured for iPhone 6.5" display
-- [ ] Archive built and uploaded from Xcode
 - [ ] Submitted for App Review in App Store Connect
 
 ---
