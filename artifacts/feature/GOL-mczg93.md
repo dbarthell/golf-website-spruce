@@ -266,9 +266,9 @@ Apple review typically takes 1–3 business days.
 - [x] App Store provisioning profile created (ZeroBreak App Store) and selected in Xcode Release config
 - [x] App Store Connect: app record created
 - [x] Archive built and uploaded from Xcode
-- [ ] App Store Connect: all metadata filled in
-- [ ] Screenshots captured for iPhone 6.5" display
-- [ ] Submitted for App Review in App Store Connect
+- [x] App Store Connect: all metadata filled in
+- [x] Screenshots captured for iPhone 6.5" display
+- [x] Submitted for App Review in App Store Connect — submitted 2026-03-21, awaiting Apple decision
 
 ---
 
