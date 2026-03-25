@@ -2,7 +2,7 @@
 id: GOL-mg7ga4
 type: feature
 title: Header overlaps iOS status bar
-status: In Review
+status: Done
 ---
 # Header overlaps iOS status bar
 
