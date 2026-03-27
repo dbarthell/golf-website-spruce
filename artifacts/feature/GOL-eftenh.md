@@ -2,7 +2,7 @@
 id: GOL-eftenh
 type: feature
 title: Clockface slope tilt and lateral aim target ring
-status: In Progress
+status: Done
 ---
 # Clockface slope tilt and lateral aim target ring
 
