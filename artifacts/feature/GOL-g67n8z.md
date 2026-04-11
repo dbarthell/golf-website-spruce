@@ -6,173 +6,78 @@ status: In Progress
 ---
 # Golf Intelligence API
 
-I want to explore Golf Intelligence's API for my app: "Hey Dan,
+## Feature Summary
 
-Sorry for not getting back to you on this.. your messages were stuck on one of my filters.
-
-I've created a test account for you in our GolfIntelligence console.
-
-You can log in here: [https://console.golfintelligence.com/](https://console.golfintelligence.com/)
-
-- Login: Your email address
-- Password: The verification code sent to your inbox
-
-Once logged in, you'll find:
-
-- **Postman Collections** with ready-to-use requests for all our API endpoints
-- **Swagger documentation** (interactive API reference)
-- Your **Active Token** and **Client ID** for authentication
-
-You currently have **200 test credits**, which should be enough to download several full courses, render green slope images, elevations, and more.
-
-Let me know if you need more credits, want me to add other team members, or have any questions about the endpoints or setup.
-
-Happy to help!
-
-Best, Chase" 
-
-"
-
-[
-Snapshot](https://console.golfintelligence.com/partner/snapshot)[
-API Account](https://console.golfintelligence.com/partner/info)[
-Credits](https://console.golfintelligence.com/partner/credits)[
-Live Log](https://console.golfintelligence.com/partner/live)[
-Log History](https://console.golfintelligence.com/partner/log)
-
-Account Info
-
-| Account | Coniferous.dev |
-| --- | --- |
-| Created | 04/10/2026 |
-| ClientId | 1029290 |
-| Credit Balance | 200 |
-| Balanced Updated | 04/10 |
-| Active Token | b4f8f9a5-f7c3-459d-8eee-a17f76ba85cf |
-| Token Expires | 04/10/2027 |
-| Client Login | Coniferousdev@GolfIntelligence.com |
-
-Token
-
-| Token | Created | Expires | IsActive |
-| --- | --- | --- | --- |
-| b4f8f9a5-f7c3-459d-8eee-a17f76ba85cf | 04/10/2026 | 04/10/2027 | YES |
-
-[Reset Token]()
-
-API Access
-
-| Access Type | Access | Cost |
-| --- | --- | --- |
-| **Render Green Slope** /greens/getSlopeImage | YES | 1 |
-| **Render Green Elevation** /greens/getElevationImage | YES | 1 |
-| **Full Course Detail w/ Scorecard & GPS** /courses/getCourseGroupDetail | YES | 3 |
-| **Course Search** /courses/searchCourseGroups | YES | 0 |
-| **Course ScoreCard** /courses/getCourseGroupScorecard | YES | 1 |
-| **Course GPS** /courses/getCourseGroupGPS | YES | 2 |
-
-| API Region | Access |
-| --- | --- |
-| **Minor Countries** | YES |
-| **Asia** | YES |
-| **Australia & New Zealand** | YES |
-| **Mainland Europe** | YES |
-| **United Kingdom** | YES |
-| **Canada** | YES |
-| **United States** | YES |
-
-Account Admin
-
-| GolferId | Name | Created |
-| --- | --- | --- |
-| 1029291 | null null | 04/10/2026 |
-
-"
-
-also check my gmail thread (dan@coniferous.dev) with Chase at Golf Intelligence for more context. I specifically want to their green slope data in the putting module of the app
+Integrate the Golf Intelligence (GI) API into the ZeroBreak putting module to surface **green slope images** and use them to **automatically infer distance, slope %, and clock position** from a two-tap interface. The golfer taps the hole and their ball on the slope map; the app calculates distance from pixel geometry and infers slope/break direction from the GI color scale.
 
 ---
 
 ## Implementation Plan
 
-### Summary
+### What Needs to Change and Why
 
-Integrate the Golf Intelligence API into the ZeroBreak putting module to surface **green slope images** (and optionally elevation images) on the `LookupPage`. The primary goal is to let a golfer select their course and hole number so they can see a visual slope map of the green while they're filling out the slope/stimp inputs — giving them a real reference image instead of relying on eyeballing.
+The original plan was just to display a slope image as a visual aid. During implementation, we went further: by reading pixel colors from the GI slope image we can infer the actual slope %, the uphill/downhill direction, and the break direction — eliminating three manual input steps for the golfer. This is the core value of the integration.
 
-The API is image-based: `/greens/getSlopeImage` returns a rendered slope image for a given green (1 credit each). There is no endpoint that returns a raw slope percentage to auto-fill the input — so the integration is a **visual aid**, not an auto-populate. The golfer looks at the image and sets the slope manually.
+### Architecture Overview
 
-### What the API Gives Us
+```
+GreenSlopePanel (UI) ──┐
+                       ├── useCourseSelector (state hook)
+                       │       ├── golfIntelligence.ts  (API client, auth, caching)
+                       │       └── localStorage          (course/hole persistence)
+                       └── slopeColor.ts               (pixel color → slope+clock)
+```
 
-- **Course Search** (`/courses/searchCourseGroups`) — free, find a course by name
-- **Green Slope Image** (`/greens/getSlopeImage`) — 1 credit, returns a rendered slope overlay image keyed by course + hole
-- **Green Elevation Image** (`/greens/getElevationImage`) — 1 credit, 3D elevation view of a green
-- **"Make Putt" feature** (coming soon per Chase) — given ball & hole position, returns aim path calculation. This could eventually replace or augment the ZBL math.
-
-### Files to Create
+### Files Created
 
 | File | Purpose |
-|---|---|
-| [src/lib/golfIntelligence.ts](code://src/lib/golfIntelligence.ts) | API client — `searchCourses()`, `getSlopeImage()`, `getElevationImage()` |
-| [src/hooks/useCourseSelector.ts](code://src/hooks/useCourseSelector.ts) | State hook — selected course, hole, cached image URLs |
-| [src/components/GreenSlopePanel.tsx](code://src/components/GreenSlopePanel.tsx) | UI panel — course search, hole picker, slope/elevation image display |
+| --- | --- |
+| [golfIntelligence.ts](code://src/lib/golfIntelligence.ts) | GI API client — OAuth token exchange, course search, scorecard (hole IDs), slope/elevation image fetch with two-layer cache (memory + localStorage) |
+| [slopeColor.ts](code://src/lib/slopeColor.ts) | Canvas pixel reader — classifies GI color scale to slope %, infers clock position from uphill/downhill and break direction gradients |
+| [useCourseSelector.ts](code://src/hooks/useCourseSelector.ts) | React state hook — debounced search, course/hole persistence, explicit image load trigger |
+| [GreenSlopePanel.tsx](code://src/components/GreenSlopePanel.tsx) | Collapsible UI panel — course search → hole picker → slope/elevation toggle → two-tap inference → "Use in app" |
 
-### Files to Modify
+### Files Modified
 
 | File | Change |
-|---|---|
-| [src/pages/LookupPage.tsx](code://src/pages/LookupPage.tsx) | Add `<GreenSlopePanel>` below the slope/stimp inputs, above the clock face |
-| [src/hooks/useLookupState.ts](code://src/hooks/useLookupState.ts) | Persist selected course + hole to localStorage so it survives navigation |
+| --- | --- |
+| [LookupPage.tsx](code://src/pages/LookupPage.tsx) | Added `<GreenSlopePanel>` stacked between inputs and WalkOffTip/clock face |
+| [vite.config.ts](code://vite.config.ts) | Added `/gi-api` proxy (GI API, avoids CORS) and `/cf-img` proxy (CloudFront CDN, enables canvas `getImageData`) |
+| [global.css](code://src/styles/global.css) | Added all GreenSlopePanel styles: toggle header, search, hole chips, mode toggle, image overlay, result panel, clock chips |
+| `.env.local` | `VITE_GI_API_TOKEN` and `VITE_GI_CLIENT_ID` (gitignored) |
 
-### Implementation Steps
+### Key Technical Decisions
 
-**Step 1 — API Client (`src/lib/golfIntelligence.ts`)**
+**Auth flow:** GI uses a two-step OAuth-style flow — POST the static API token to `/auth/authenticateToken` to get a short-lived Bearer access token. The client caches the access token + refresh token in memory with a 1-hour TTL. On expiry it tries the refresh token first, falls back to full re-auth.
 
-Create a thin fetch wrapper. Auth is a Bearer token in the `Authorization` header plus `ClientId` query param (need to confirm exact auth shape from Swagger — see open questions below).
+**Credit conservation:** Slope/elevation images cost 1 credit each. The app only fetches on explicit user tap ("Load Green Map"). Fetched images are cached in two layers: in-memory `Map` (survives re-renders, cleared on page reload) and `localStorage` keyed by `endpoint:holeId` (survives page reloads, \~1-year TTL from CloudFront URL expiry).
 
-```
-searchCourseGroups(query: string): Promise<CourseGroup[]>
-getSlopeImage(courseGroupId: string, hole: number): Promise<string>  // returns image URL or blob URL
-getElevationImage(courseGroupId: string, hole: number): Promise<string>
-```
+**Canvas CORS:** CloudFront blocks `canvas.getImageData()` cross-origin. In the browser we route the image through a Vite `/cf-img` proxy (same-origin). In the Capacitor iOS native build, CORS isn't a restriction so we use the direct URL.
 
-Credentials stored in environment variables (`VITE_GI_TOKEN`, `VITE_GI_CLIENT_ID`) — **never committed to source**. For the iOS Capacitor build these get baked in at build time via Vite's `import.meta.env`.
+**Clock inference math:**
 
-**Step 2 — Course Selector Hook (`src/hooks/useCourseSelector.ts`)**
+- `uphillValue = avgSteepness(hole end) − avgSteepness(ball end)` — positive = uphill putt (toward steeper/higher)
+- `breakValue = avgSteepness(right side) − avgSteepness(left side)` — positive = right-high = ball breaks left (3 o'clock)
+- `theta = atan2(breakValue, −uphillValue)` → mapped to nearest CLOCK\_ENTRIES key
 
-- `courseQuery` + `setCourseQuery` — search string
-- `searchResults` — debounced results from `searchCourseGroups`
-- `selectedCourse` / `setSelectedCourse` — persisted to localStorage
-- `selectedHole` / `setSelectedHole` — 1–18, persisted
-- `slopeImageUrl` — fetched on demand, cached by `courseId+hole` key so we don't re-spend credits
+**Tap vs scroll conflict:** `onTouchStart` records position; `onTouchEnd` only registers a tap if movement < 12px. This prevents accidental taps while the user scrolls past the image.
 
-**Step 3 — Green Slope Panel (`src/components/GreenSlopePanel.tsx`)**
+### Remaining Work / Open Items
 
-Collapsible panel (closed by default to keep the main UI clean):
-1. Search box → typeahead results → tap to select course
-2. Hole number picker (1–18 chips or stepper)
-3. "Load Green Map" button (with credit cost warning: "1 credit")
-4. Displays slope image full-width below; toggle to elevation image
+1. **Confirm CSS dropdown fix** — The course search dropdown was styled with a white background inside the dark panel. A fix was applied (changed to `var(--green-mid)` background with white text). Needs visual confirmation on device.
+2. **Verify end-to-end inference accuracy** — The slope % and clock position inference has been built but not fully validated against known putts. Accuracy depends on the GI color scale being consistent and the canvas sampling logic being correctly oriented. Should test on a known green (e.g. Minnesota Valley CC, Hole 1).
+3. **Distance unit awareness** — The inferred distance is always in feet (pixel geometry × `meterToPixelScale × 3.28084`). The app supports a feet/metres toggle via `useUnits`. The `GreenSlopePanel` currently always shows "ft" in the result panel. If the user is in metres mode, the displayed value and the value sent to the app via `onSetDistance` should be consistent with the current unit.
+4. **"Make Putt" API endpoint** — Chase at GI mentioned an upcoming endpoint that returns the recommended aim path given ball + hole GPS position. This could eventually supplement or replace the ZBL aim calculation. No action needed now but worth tracking.
+5. **Production credit model** — The 200 test credits are sufficient for development. A commercial conversation with GI is needed before shipping to real users.
+6. **Pre-fetch for offline use** — The app is used on the golf course where connectivity can be spotty. A future enhancement could pre-fetch and cache all 18 greens for a selected course before the round starts.
 
-**Step 4 — Wire into LookupPage**
+### Credit Usage Reference
 
-Add `<GreenSlopePanel>` between the inputs section and the `<WalkOffTip>` / clock face. Collapsed by default.
+| API Call | Cost |
+| --- | --- |
+| `searchCourseGroups` | 0 |
+| `getCourseGroupScorecard` | 1 |
+| `getSlopeImage` | 1 |
+| `getElevationImage` | 1 |
 
-**Step 5 — Environment / Build config**
-
-Add `VITE_GI_TOKEN` and `VITE_GI_CLIENT_ID` to `.env.local` (gitignored) and document in `README.md`.
-
-### Credit Usage Strategy
-
-- Course search is free — safe to call on every keystroke (debounced)
-- Slope/elevation images cost 1 credit each — only fetch on explicit user tap ("Load Green Map"), not automatically
-- Cache fetched image URLs in memory (and optionally `sessionStorage`) so navigating away and back doesn't re-charge credits
-- 200 test credits → up to 200 unique green maps before needing a top-up
-
-### Open Questions / Decisions Needed
-
-1. **Auth format** — The console shows a Bearer token + ClientId, but I need to confirm the exact header/param names from the Swagger docs or Postman collection. Needs a quick check before writing the API client.
-2. **Endpoint for getSlopeImage** — What identifies a specific green? Is it `courseGroupId` + `holeNumber`, or is there a separate `greenId` lookup step? (Dan asked this in the email thread; Chase's account setup reply didn't answer it directly.)
-3. **Image format returned** — Does the endpoint return a redirect to an image URL, a base64 blob, or a binary stream? Affects how we display it.
-4. **"Make Putt" ETA** — Chase mentioned this feature is coming soon. If it returns an aim path given ball + hole position, it could eventually replace the ZBL aim math in the app. Worth asking Chase for a timeline so we know whether to architect for it now.
-5. **Credit model for production** — 200 test credits is fine for dev/QA. What's the pricing for production usage? Per-credit, subscription? Need a commercial conversation before shipping to real users.
-6. **Offline/on-course use** — The app is used on the golf course where connectivity may be poor. Should we pre-fetch and cache green images for a selected course before the round, or always fetch on-demand?
+Course search is debounced (400ms) and free. Scorecard is fetched once per course (in-memory cached). Images are fetched once per hole per mode (two-layer cached).
