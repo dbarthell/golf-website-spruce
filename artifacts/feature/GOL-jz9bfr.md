@@ -2,7 +2,7 @@
 id: GOL-jz9bfr
 type: feature
 title: New module for club yardages
-status: In Review
+status: Done
 ---
 # New module for club yardages
 
