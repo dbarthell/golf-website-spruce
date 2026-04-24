@@ -1,16 +1,21 @@
 id: 586a80c0-a718-43fc-b524-2ffdf57faff5
+name: golf-website
 alias: GOL
 color: '#ef4444'
+baseBranch: main
 focusBarFilter:
   conditions:
   - type: hasBranch
   - type: hasActiveSession
-  - type: fieldFilter
-    field: status
+  - field: status
     filter:
       type: in
       values:
       - Todo
       - In Progress
       - In Review
-baseBranch: main
+    type: fieldFilter
+repositories:
+- baseBranch: main
+  id: golf-website
+  remote: https://github.com/dbarthell/golf-website.git
