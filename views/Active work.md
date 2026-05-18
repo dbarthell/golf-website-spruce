@@ -18,8 +18,11 @@ searchOptions:
   - size
   - templateType
   - tasks
-  showEmptyGroups: false
-  showNoValueGroup: false
+  - modified
+  showEmptyGroups: true
+  showNoValueGroup: true
+display:
+  icon: bolt
 ---
 # Active Work
 

@@ -3,16 +3,19 @@ searchQuery: {}
 searchOptions:
   groupBy: status
   sortBy:
-    field: priority
-    direction: asc
+    field: modified
+    direction: desc
   visibleFields:
   - priority
   - size
   - assignee
   - templateType
   - tasks
+  - modified
   showEmptyGroups: true
   showNoValueGroup: false
+display:
+  icon: layout-kanban
 ---
 # Kanban
 

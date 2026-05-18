@@ -1,23 +1,26 @@
 ---
-searchOptions:
-  groupBy: priority
-  showEmptyGroups: true
-  showNoValueGroup: true
-  sortBy:
-    direction: desc
-    field: created
-  visibleFields:
-  - status
-  - size
-  - assignee
-  - templateType
 searchQuery:
   customFields:
     status:
       type: in
       values:
       - Backlog
+searchOptions:
+  groupBy: priority
+  sortBy:
+    field: modified
+    direction: desc
+  visibleFields:
+  - status
+  - size
+  - assignee
+  - templateType
+  - modified
+  showEmptyGroups: true
+  showNoValueGroup: true
+display:
+  icon: flag-filled
 ---
-# Prioritization
+# Backlog
 
-Saved view with current search configuration.
+Items in Backlog status, grouped by priority for planning and grooming.
